@@ -27,7 +27,7 @@ form = """<form method="post" action="/testform">
     <label> Year
         <input type="text" name="year">
     </label>
-    <div>%(error)s</div>
+    <div  style="color: red">%(error)s</div>
     <br>
     <br>
     <input type="submit">
