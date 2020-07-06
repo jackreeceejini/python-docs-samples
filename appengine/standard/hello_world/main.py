@@ -34,9 +34,11 @@ form = """<form method="post" action="/testform">
 </form>
 """
 class MainPage(webapp2.RequestHandler):
+    def write_form(error=""):
+        self.response.out.write(form % {"error":  error})
     def get(self):
         #self.response.headers['Content-Type'] = 'text/html'
-        self.response.out.write(form)
+        self.write_form()
 
 class TestHandler(webapp2.RequestHandler):
     def post(self):
@@ -45,7 +47,7 @@ class TestHandler(webapp2.RequestHandler):
         user_year = valid_year(self.request.get('year'))
 
         if not (user_month and user_day and user_year):
-            self.response.out.write(form)
+            self.write_form("That doesn't look valid to me, friend.")
         else:
             self.response.out.write("Thanks! That's a totally valid day!")
 
