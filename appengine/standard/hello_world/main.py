@@ -26,10 +26,14 @@ class MainPage(webapp2.RequestHandler):
 
 class TestHandler(webapp2.RequestHandler):
     def post(self):
-        q = self.request.get("q")
-        self.response.out.write(q)
-        #self.response.headers['Content-Type'] = 'text/plain'
-        self.response.out.write(self.request)
+        user_month = valid_month(self.request.get('month'))
+        user_day = valid_day(self.request.get('day'))
+        user_year = valid_year(self.request.get('year'))
+
+        if not (user_month and user_day and user_year):
+            self.response.out.write(form)
+        else:
+            self.response.out.write("Thanks! That's a totally valid day!")
 
 
 app = webapp2.WSGIApplication([
