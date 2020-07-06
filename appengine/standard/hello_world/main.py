@@ -34,7 +34,7 @@ form = """<form method="post" action="/testform">
 </form>
 """
 class MainPage(webapp2.RequestHandler):
-    def write_form(error=""):
+    def write_form(self, error=""):
         self.response.out.write(form % {"error":  error})
     def get(self):
         #self.response.headers['Content-Type'] = 'text/html'
