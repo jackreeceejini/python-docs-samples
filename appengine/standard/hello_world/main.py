@@ -15,7 +15,7 @@
 import webapp2
 from validation import valid_day, valid_month, valid_year
 
-form = """<form method="post" action="/testform">
+form = """<form method="post">
 <label> <h3> What is your birthday</h3> </label>
 <br>
     <label> Day
@@ -27,7 +27,7 @@ form = """<form method="post" action="/testform">
     <label> Year
         <input type="text" name="year">
     </label>
-    <div  style="color: red">%(error)s</div>
+    <div style="color: red">%(error)s</div>
     <br>
     <br>
     <input type="submit">
@@ -39,8 +39,6 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
         #self.response.headers['Content-Type'] = 'text/html'
         self.write_form()
-
-class TestHandler(webapp2.RequestHandler):
     def post(self):
         user_month = valid_month(self.request.get('month'))
         user_day = valid_day(self.request.get('day'))
@@ -50,9 +48,8 @@ class TestHandler(webapp2.RequestHandler):
             self.write_form("That doesn't look valid to me, friend.")
         else:
             self.response.out.write("Thanks! That's a totally valid day!")
-
+    
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage), 
-    ('/testform', TestHandler)
+    ('/', MainPage)
 ], debug=True)
