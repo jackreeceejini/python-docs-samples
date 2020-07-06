@@ -13,10 +13,24 @@
 # limitations under the License.
 
 import webapp2
+from validation import valid_day, valid_month, valid_year
 
 form = """<form method="post" action="/testform">
-<input name="q">
-<input type="submit">
+<label> <h3> What is your birthday</h3> </label>
+<br>
+    <label> Day
+        <input type="text" name="day">
+    </label>
+    <label> Month
+        <input type="text" name="month">
+    </label>
+    <label> Year
+        <input type="text" name="year">
+    </label>
+    <div>%(error)s</div>
+    <br>
+    <br>
+    <input type="submit">
 </form>
 """
 class MainPage(webapp2.RequestHandler):
